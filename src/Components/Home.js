@@ -1,53 +1,62 @@
-import React from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import one from "../assets/Rectangle 26.png";
+import React, { useRef, useState } from "react";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+// import required modules
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
+
+import one from "../assets/one.png";
+import two from "../assets/two.png";
+import three from "../assets/three.png";
 
 const Home = () => {
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
+  const handleClick = () => {
+    console.log("clicked");
   };
   return (
-    <div>
-      <div className="hero min-h-screen">
-        <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold uppercase">Cox's bazar</h1>
-            <p className="py-6">
-              Cox's Bazar is a city, fishing port, tourism centre and district
-              headquarters in southeastern Bangladesh. It is famous mostly for
-              its long natural sandy beach, and it ...
-            </p>
-          </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl">
-            <div>
-              <h2>Center Mode</h2>
-              <Slider {...settings}>
-                <div>
-                  <h3>
-                    <img src={one} alt="" />
-                  </h3>
-                </div>
-                <div>
-                  <h3>
-                    <img src={one} alt="" />
-                  </h3>
-                </div>
-                <div>
-                  <h3>
-                    <img src={one} alt="" />
-                  </h3>
-                </div>
-              </Slider>
-            </div>
-          </div>
-        </div>
+    <div className="border-2 border-red-600 mt-40 grid grid-cols-2 gap-3">
+      <div className="border border-yellow-600 mt-5 mb-5">
+        <h1>Info Side</h1>
+      </div>
+      <div className="border border-white mt-5 mb-5">
+        <Swiper
+          effect={"coverflow"}
+          slidesPerView={2}
+          spaceBetween={30}
+          centeredSlides={true}
+          // autoplay={{
+          //   delay: 1500,
+          //   disableOnInteraction: false,
+          // }}
+          pagination={{
+            clickable: true,
+          }}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          navigation={true}
+          modules={[EffectCoverflow, Pagination, Navigation]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
+            <img onClick={handleClick} src={one} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img onClick={handleClick} src={two} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img onClick={handleClick} src={three} alt="" />
+          </SwiperSlide>
+        </Swiper>
       </div>
     </div>
   );
